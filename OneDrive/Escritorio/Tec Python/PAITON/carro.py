@@ -1,4 +1,6 @@
+
 import pygame
+
 x = 0
 SCREEN_WIDTH, SCREEN_HEIGHT = 1000, 300
 WHITE  = (255, 255, 255)

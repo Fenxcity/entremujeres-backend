@@ -18,6 +18,7 @@ running = True
 clock = pygame.time.Clock()
 
 
+
 estado = "VERDE"          
 t_estado = pygame.time.get_ticks()
 verde_on = True            

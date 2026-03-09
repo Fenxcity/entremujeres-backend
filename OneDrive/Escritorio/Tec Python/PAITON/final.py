@@ -146,7 +146,7 @@ while running:
         if x >= 1260:
             x = 1260
             tramo = "curva"
-            angulo_curva = -math.pi / 2
+            Vel_angular = -math.pi / 2
 
     elif tramo == "curva":
         centro_x = 1350

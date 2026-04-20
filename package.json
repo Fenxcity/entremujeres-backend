@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Backend API para Entre Mujeres Legal",
   "private": true,
+  "type": "module",
   "engines": {
     "node": ">=20"
   }

@@ -1,104 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Entre Mujeres Legal – Asesora Jurídica</title>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --rosa:    #b5446e;
-      --rosa-cl: #f7e8ef;
-      --morado:  #6b2d5e;
-      --gris:    #f4f4f6;
-      --texto:   #2d2d2d;
-      --borde:   #e0d0da;
-    }
-    body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--gris); color: var(--texto); height: 100dvh; display: flex; flex-direction: column; }
-    header { background: linear-gradient(135deg, var(--morado), var(--rosa)); color: #fff; padding: 14px 20px; display: flex; align-items: center; gap: 14px; box-shadow: 0 2px 8px rgba(0,0,0,.2); flex-shrink: 0; }
-    .logo { width: 44px; height: 44px; background: rgba(255,255,255,.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; }
-    .header-text h1 { font-size: 1.05rem; font-weight: 700; }
-    .header-text p  { font-size: .78rem; opacity: .85; margin-top: 2px; }
-    .emergencia { background: #fff3cd; border-left: 4px solid #e6a817; padding: 8px 16px; font-size: .78rem; color: #5a4000; flex-shrink: 0; }
-    .emergencia strong { color: #c0392b; }
-    #chat { flex: 1; overflow-y: auto; padding: 20px 16px; display: flex; flex-direction: column; gap: 14px; }
-    .burbuja { max-width: 78%; padding: 11px 15px; border-radius: 18px; line-height: 1.55; font-size: .93rem; word-break: break-word; }
-    .burbuja.bot  { background: #fff; border: 1px solid var(--borde); border-bottom-left-radius: 4px; align-self: flex-start; }
-    .burbuja.user { background: linear-gradient(135deg, var(--morado), var(--rosa)); color: #fff; border-bottom-right-radius: 4px; align-self: flex-end; }
-    .burbuja.typing { display: flex; gap: 6px; align-items: center; padding: 14px 18px; }
-    .dot { width: 8px; height: 8px; background: var(--rosa); border-radius: 50%; animation: bounce .9s infinite; }
-    .dot:nth-child(2) { animation-delay: .15s; }
-    .dot:nth-child(3) { animation-delay: .30s; }
-    @keyframes bounce { 0%,80%,100% { transform: translateY(0); } 40% { transform: translateY(-8px); } }
-    .input-area { background: #fff; border-top: 1px solid var(--borde); padding: 12px 16px; display: flex; gap: 10px; align-items: flex-end; flex-shrink: 0; }
-    textarea { flex: 1; border: 1.5px solid var(--borde); border-radius: 22px; padding: 10px 16px; font-size: .93rem; font-family: inherit; resize: none; max-height: 120px; outline: none; transition: border-color .2s; line-height: 1.4; }
-    textarea:focus { border-color: var(--rosa); }
-    textarea::placeholder { color: #aaa; }
-    button#send { width: 44px; height: 44px; border: none; border-radius: 50%; background: linear-gradient(135deg, var(--morado), var(--rosa)); color: #fff; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: opacity .2s, transform .1s; flex-shrink: 0; }
-    button#send:hover  { opacity: .88; }
-    button#send:active { transform: scale(.93); }
-    button#send:disabled { opacity: .45; cursor: not-allowed; }
-    .disclaimer { text-align: center; font-size: .71rem; color: #999; padding: 6px 16px 10px; background: #fff; }
-    @media (max-width: 500px) { .burbuja { max-width: 90%; } }
-  </style>
-</head>
-<body>
-<header>
-  <div class="logo">⚖️</div>
-  <div class="header-text">
-    <h1>Entre Mujeres Legal</h1>
-    <p>Asesora jurídica en violencia de género · Puebla, México</p>
-  </div>
-</header>
-<div class="emergencia">
-  ⚠️ Si estás en peligro inmediato llama al <strong>911</strong> o Línea VIDA <strong>800-911-2000</strong> (24h, gratuita)
-</div>
-<div id="chat"></div>
-<div class="input-area">
-  <textarea id="input" rows="1" placeholder="Escribe tu consulta aquí…"></textarea>
-  <button id="send" title="Enviar">&#9658;</button>
-</div>
-<div class="disclaimer">
-  La orientación brindada es general y no constituye patrocinio legal ni relación abogado-cliente.
-</div>
-<script>
-  const API_URL = "https://entremujeres-backend.vercel.app/api/chat";
-  const chat    = document.getElementById("chat");
-  const input   = document.getElementById("input");
-  const sendBtn = document.getElementById("send");
-  const messages = [];
-
-  appendBot("Hola, bienvenida a **Entre Mujeres Legal**. Soy tu asesora jurídica virtual especializada en violencia de género bajo el sistema penal acusatorio mexicano.\n\nPuedo orientarte sobre tus derechos, procesos legales y recursos disponibles en áreas como violencia familiar, acoso sexual, Ley Olimpia, entre otras.\n\n¿En qué puedo ayudarte hoy?");
-
-  input.addEventListener("input", () => { input.style.height = "auto"; input.style.height = input.scrollHeight + "px"; });
-  input.addEventListener("keydown", (e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); enviar(); } });
-  sendBtn.addEventListener("click", enviar);
-
-  async function enviar() {
-    const texto = input.value.trim();
-    if (!texto || sendBtn.disabled) return;
-    appendUser(texto);
-    messages.push({ role: "user", content: texto });
-    input.value = "";
-    input.style.height = "auto";
-    sendBtn.disabled = true;
-    const typing = appendTyping();
-    try {
-      const res  = await fetch(API_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ messages }) });
-      const data = await res.json();
-      typing.remove();
-      if (data.reply) { messages.push({ role: "assistant", content: data.reply }); appendBot(data.reply); }
-      else { appendBot("Ocurrió un error al obtener la respuesta. Por favor intenta de nuevo."); }
-    } catch { typing.remove(); appendBot("No pude conectarme al servidor. Verifica tu conexión e intenta de nuevo."); }
-    sendBtn.disabled = false;
-    input.focus();
-  }
-
-  function appendUser(texto) { const d = document.createElement("div"); d.className = "burbuja user"; d.textContent = texto; chat.appendChild(d); scrollBottom(); return d; }
-  function appendBot(texto)  { const d = document.createElement("div"); d.className = "burbuja bot";  d.innerHTML = markdownLite(texto); chat.appendChild(d); scrollBottom(); return d; }
-  function appendTyping()    { const d = document.createElement("div"); d.className = "burbuja bot typing"; d.innerHTML = '<div class="dot"></div><div class="dot"></div><div class="dot"></div>'; chat.appendChild(d); scrollBottom(); return d; }
-  function scrollBottom()    { chat.scrollTop = chat.scrollHeight; }
-  function markdownLite(txt) { return txt.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/\*\*(.+?)\*\*/g,"<strong>$1</strong>").replace(/\n/g,"<br>"); }
-</script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Entre Mujeres Legal</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>

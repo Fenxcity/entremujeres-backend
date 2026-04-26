@@ -288,6 +288,12 @@ export default async function handler(req, res) {
 
   const { messages } = req.body;
 
+  // Log de preguntas para revisión en Vercel Logs
+  const lastMsg = messages?.[messages.length - 1];
+  if (lastMsg?.role === "user") {
+    console.log(`[EML] ${new Date().toISOString()} | ${lastMsg.content}`);
+  }
+
   if (!messages || !Array.isArray(messages)) {
     return res.status(400).json({ error: "Formato inválido" });
   }

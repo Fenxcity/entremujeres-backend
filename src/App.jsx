@@ -500,8 +500,8 @@ export default function App() {
               </ul>
             </div>
             <div style={{ borderTop: `1px solid ${C.gold}55`, paddingTop: "24px", display: "flex", justifyContent: "flex-end" }}>
-              <
-                href="https://wa.me/525527459155?text=Hola,%20quiero%20agendar%20una%20videoconsulta%20de%20$700"
+              <a
+                href="https://wa.me/525527459155?text=Hola,%20quiero%20agendar%20una%20videoconsulta"
                 target="_blank" rel="noopener noreferrer"
                 style={{
                   background: C.charcoal, color: C.cream, textDecoration: "none",

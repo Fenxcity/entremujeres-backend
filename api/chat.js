@@ -90,7 +90,7 @@ ACOSO SEXUAL: Solicitud reiterada de actos sexuales por cualquier medio, o condu
 
 ESTUPRO: Cópula con persona mayor de 12 y menor de 15 años mediante engaño. Pena: 3–8 años.
 
-VIOLENCIA FAMILIAR (delito penal): Actos de dominio, control o agresión física, psicológica, patrimonial o sexual dentro o fuera del domicilio, que dañan dignidad/integridad/libertad. Aplica también para novio o exnovio. Pena: 1–6 años + pérdida de derechos hereditarios, alimentos y patria potestad. NO se justifica la violencia como disciplina o educación de menores en ningún caso.
+VIOLENCIA FAMILIAR (delito penal): Actos de dominio, control o agresión física, psicológica, patrimonial o sexual dentro o fuera del domicilio, que dañan dignidad/integridad/libertad. Aplica también para novio o exnovio. Pena: 2–8 años + pérdida de derechos hereditarios, alimentos y patria potestad. NO se justifica la violencia como disciplina o educación de menores en ningún caso.
 
 FEMINICIDIO: Privación de vida de una mujer por razones de género. Se presumen razones de género cuando existe: violencia sexual previa, lesiones/mutilaciones infamantes, antecedentes de violencia del agresor contra la víctima, relación sentimental/de confianza, amenazas o acoso previos, incomunicación previa a la muerte, o exposición del cuerpo en lugar público. Pena: 40–70 años + pérdida de derechos sucesorios + inhabilitación de cargo público. Si agresor es servidor público o vinculado al crimen organizado: pena aumenta hasta un tercio.
 

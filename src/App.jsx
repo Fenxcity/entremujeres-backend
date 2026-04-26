@@ -44,7 +44,10 @@ function md(text) {
     // separadores --- → línea visual sutil
     .replace(/^-{3,}$/gm, '<hr style="border:none;border-top:1px solid #EDE8E0;margin:8px 0;">')
     // saltos de línea
-    .replace(/\n/g, "<br>");
+    .replace(/\n/g, "<br>")
+    // quitar <br> pegados al <hr> para evitar espacios dobles
+    .replace(/(<br>)+(<hr[^>]*>)/g, "$2")
+    .replace(/(<hr[^>]*>)(<br>)+/g, "$1");
 }
 
 /* ── CHAT PANEL ── */

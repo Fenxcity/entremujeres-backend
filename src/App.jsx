@@ -8,24 +8,23 @@ const C = {
   charcoal: "#2C2A27", slate: "#5A5652", mist: "#9A9590",
 };
 
-const PREGUNTAS = [
-  "Mi esposo me pegó. ¿Qué puedo hacer legalmente?",
-  "¿Cómo pido una orden de protección en México?",
-  "Mi pareja me amenaza con quitarme a mis hijos.",
-  "Publicaron fotos mías íntimas sin mi consentimiento.",
-  "Sufro acoso sexual en mi trabajo. ¿Puedo denunciar?",
-  "¿Qué es la Ley Olimpia y cómo me protege?",
-  "¿Qué derechos tengo como víctima de violación?",
-  "Mi pareja controla mi dinero y no me deja salir.",
+const SUGERIDAS = [
+  "Mi pareja me golpeó. ¿Qué puedo hacer?",
+  "¿Cómo solicito una medida de protección?",
+  "Publicaron fotos mías íntimas sin mi permiso.",
+  "Mi exnovio me violenta psicológicamente.",
 ];
 
 const DELITOS = [
-  { n: "Feminicidio",       d: "Tipificación, elementos del tipo y proceso penal." },
-  { n: "Violación",         d: "Denuncia, pruebas, derechos de la víctima y proceso." },
-  { n: "Violencia Familiar",d: "Órdenes de protección, denuncia y medidas cautelares." },
-  { n: "Acoso Sexual",      d: "Hostigamiento laboral y digital. Cómo denunciar." },
-  { n: "Ley Olimpia",       d: "Violencia digital, difusión sin consentimiento y sanciones." },
-  { n: "Trata de Personas", d: "Identificación, asistencia a víctimas y proceso legal." },
+  { n: "Feminicidio",          d: "Homicidio de mujer por razones de género. Penas agravadas y protocolo especializado." },
+  { n: "Violación",            d: "Acceso carnal sin consentimiento. Incluye violación marital y entre conocidos." },
+  { n: "Violencia Familiar",   d: "Actos de violencia física, psicológica, patrimonial o sexual en el núcleo familiar. Aplica también para novio o exnovio." },
+  { n: "Acoso Sexual",         d: "Conducta de naturaleza sexual no deseada en espacios laborales, escolares o públicos." },
+  { n: "Ley Olimpia",          d: "Difusión no consentida de imágenes íntimas." },
+  { n: "Ciberacoso",           d: "Hostigamiento, intimidación o amenazas a través de medios digitales y redes sociales." },
+  { n: "Trata de Personas",    d: "Explotación sexual, laboral o mendicidad forzada. Derechos reforzados como víctima." },
+  { n: "Sustracción de Menor", d: "Retención ilegal de menores. Protección de derechos de custodia y convivencia." },
+  { n: "Abandono de Persona",  d: "Incumplimiento de obligación de dar alimentos. Responsabilidad penal y civil." },
 ];
 
 /* ── Markdown ── */
@@ -66,9 +65,9 @@ function loadMessages() {
 /* ── CHAT PANEL ── */
 function ChatPanel({ messages, loading, send, clearChat, open, onClose }) {
   const [input, setInput] = useState("");
-  const chatRef    = useRef(null);
+  const chatRef     = useRef(null);
   const textareaRef = useRef(null);
-  const lastMsgRef = useRef(null);
+  const lastMsgRef  = useRef(null);
 
   useEffect(() => {
     if (loading) {
@@ -95,24 +94,29 @@ function ChatPanel({ messages, loading, send, clearChat, open, onClose }) {
     e.target.style.height = e.target.scrollHeight + "px";
   };
 
+  const showSuggestions = messages.length === 1 && messages[0].role === "assistant";
+
   return (
     <div
       onClick={e => e.target === e.currentTarget && onClose()}
       style={{
-        position: "fixed", inset: 0, zIndex: 1000,
-        background: "rgba(44,42,39,0.75)",
-        display: open ? "flex" : "none", alignItems: "center", justifyContent: "center",
-        padding: "20px",
+        position: "fixed", inset: 0, zIndex: 9999,
+        background: "rgba(44,42,39,0.7)", backdropFilter: "blur(4px)",
+        display: open ? "flex" : "none", alignItems: "flex-end", justifyContent: "center",
       }}
     >
       <div style={{
-        background: C.cream, width: "100%", maxWidth: "560px",
-        boxShadow: "0 25px 60px rgba(0,0,0,0.4)",
-        display: "flex", flexDirection: "column", height: "88vh", maxHeight: "700px",
+        width: "100%", maxWidth: "620px", height: "92vh",
+        background: C.cream, display: "flex", flexDirection: "column",
+        borderRadius: "16px 16px 0 0", overflow: "hidden",
+        boxShadow: "0 -8px 40px rgba(0,0,0,0.3)",
       }}>
 
         {/* Header */}
-        <div style={{ background: C.charcoal, padding: "18px 24px", display: "flex", justifyContent: "space-between", alignItems: "center", flexShrink: 0 }}>
+        <div style={{
+          background: C.charcoal, padding: "18px 24px",
+          display: "flex", justifyContent: "space-between", alignItems: "center", flexShrink: 0,
+        }}>
           <div>
             <div style={{ fontFamily: "Georgia,serif", fontSize: "13px", letterSpacing: "0.15em", color: C.gold, textTransform: "uppercase" }}>
               Entre Mujeres Legal · Asesora IA
@@ -132,31 +136,32 @@ function ChatPanel({ messages, loading, send, clearChat, open, onClose }) {
           🆘 Peligro inmediato: <strong>911</strong> · Línea VIDA: <strong>800-911-2000</strong>
         </div>
 
-        {/* Preguntas rápidas */}
-        <div style={{ padding: "12px 16px", borderBottom: `1px solid ${C.parchment}`, flexShrink: 0 }}>
-          <div style={{ fontFamily: "Georgia,serif", fontSize: "11px", letterSpacing: "0.12em", color: C.gold, textTransform: "uppercase", marginBottom: "8px" }}>
-            Preguntas frecuentes
-          </div>
-          <div style={{ display: "flex", gap: "6px", flexWrap: "wrap" }}>
-            {PREGUNTAS.slice(0, 4).map((p, i) => (
-              <button
-                key={i}
-                onClick={() => handleSend(p)}
-                style={{
-                  background: "#fff", border: `1px solid ${C.parchment}`,
-                  borderLeft: `3px solid ${C.rose}`,
-                  padding: "6px 10px", fontFamily: "Georgia,serif", fontSize: "11px",
-                  color: C.slate, cursor: "pointer", textAlign: "left", lineHeight: "1.4",
-                }}
-              >
-                {p}
-              </button>
-            ))}
-          </div>
-        </div>
-
         {/* Mensajes */}
-        <div ref={chatRef} style={{ flex: 1, overflowY: "auto", padding: "16px", display: "flex", flexDirection: "column", gap: "12px" }}>
+        <div ref={chatRef} style={{ flex: 1, overflowY: "auto", padding: "20px 24px", display: "flex", flexDirection: "column", gap: "14px" }}>
+
+          {/* Sugerencias en estado inicial */}
+          {showSuggestions && (
+            <div style={{ display: "flex", flexDirection: "column", gap: "8px", marginBottom: "6px" }}>
+              {SUGERIDAS.map(s => (
+                <button
+                  key={s}
+                  onClick={() => handleSend(s)}
+                  style={{
+                    background: C.parchment, border: `1px solid ${C.gold}44`,
+                    borderRadius: "8px", padding: "10px 14px",
+                    fontFamily: "Georgia,serif", fontSize: "13px",
+                    color: C.charcoal, cursor: "pointer", textAlign: "left",
+                    transition: "background 0.2s",
+                  }}
+                  onMouseEnter={e => e.currentTarget.style.background = C.goldLight + "33"}
+                  onMouseLeave={e => e.currentTarget.style.background = C.parchment}
+                >
+                  {s}
+                </button>
+              ))}
+            </div>
+          )}
+
           {messages.map((m, i) => (
             <div key={i} ref={i === messages.length - 1 ? lastMsgRef : null} style={{ display: "flex", justifyContent: m.role === "user" ? "flex-end" : "flex-start" }}>
               <div
@@ -176,6 +181,7 @@ function ChatPanel({ messages, loading, send, clearChat, open, onClose }) {
               />
             </div>
           ))}
+
           {loading && (
             <div style={{ display: "flex", justifyContent: "flex-start" }}>
               <div style={{ padding: "10px 16px", background: "#fff", border: `1px solid ${C.parchment}`, borderLeft: `3px solid ${C.gold}`, display: "flex", gap: "6px", alignItems: "center" }}>
@@ -187,40 +193,41 @@ function ChatPanel({ messages, loading, send, clearChat, open, onClose }) {
           )}
         </div>
 
+        {/* Disclaimer */}
+        <div style={{ background: C.parchment, padding: "6px 24px", fontFamily: "Georgia,serif", fontSize: "10px", color: C.mist, borderTop: `1px solid ${C.mist}33`, flexShrink: 0 }}>
+          Orientación general · No constituye patrocinio legal ni relación abogado-cliente
+        </div>
+
         {/* Input */}
-        <div style={{ borderTop: `1px solid ${C.parchment}`, padding: "12px 16px", display: "flex", gap: "10px", alignItems: "flex-end", background: "#fff", flexShrink: 0 }}>
+        <div style={{ padding: "12px 16px 16px", background: C.cream, display: "flex", gap: "10px", alignItems: "flex-end", borderTop: `1px solid ${C.mist}33`, flexShrink: 0 }}>
           <textarea
             ref={textareaRef}
             value={input}
             onChange={e => { setInput(e.target.value); autoResize(e); }}
             onKeyDown={handleKey}
             placeholder="Escribe tu consulta aquí…"
-            rows={1}
+            rows={2}
             style={{
-              flex: 1, border: `1.5px solid ${C.parchment}`, padding: "9px 14px",
-              fontFamily: "Georgia,serif", fontSize: "13px", resize: "none",
-              maxHeight: "100px", outline: "none", background: C.cream,
-              lineHeight: "1.5", borderRadius: "2px",
+              flex: 1, resize: "none", border: `1px solid ${C.mist}66`,
+              borderRadius: "10px", padding: "10px 14px",
+              fontFamily: "Georgia,serif", fontSize: "14px",
+              color: C.charcoal, background: C.parchment,
+              outline: "none", lineHeight: "1.5", maxHeight: "100px",
             }}
           />
           <button
             onClick={() => handleSend()}
             disabled={loading || !input.trim()}
             style={{
-              background: loading || !input.trim() ? C.mist : C.charcoal,
-              color: "#fff", border: "none", padding: "10px 18px",
-              fontFamily: "Georgia,serif", fontSize: "12px", letterSpacing: "0.08em",
-              textTransform: "uppercase", cursor: loading || !input.trim() ? "not-allowed" : "pointer",
-              flexShrink: 0,
+              background: loading || !input.trim() ? C.mist : C.gold,
+              color: "#fff", border: "none", borderRadius: "10px",
+              padding: "10px 18px", fontFamily: "Georgia,serif", fontSize: "13px",
+              cursor: loading || !input.trim() ? "default" : "pointer",
+              transition: "background 0.2s", whiteSpace: "nowrap", flexShrink: 0,
             }}
           >
             Enviar
           </button>
-        </div>
-
-        {/* Disclaimer */}
-        <div style={{ padding: "8px 16px", background: C.parchment, fontFamily: "Georgia,serif", fontSize: "11px", color: C.mist, textAlign: "center", fontStyle: "italic", flexShrink: 0 }}>
-          Orientación general — no constituye patrocinio legal ni relación abogado-cliente
         </div>
       </div>
 
@@ -236,7 +243,7 @@ function ChatPanel({ messages, loading, send, clearChat, open, onClose }) {
 
 /* ── APP PRINCIPAL ── */
 export default function App() {
-  const [open, setOpen]       = useState(false);
+  const [open, setOpen]         = useState(false);
   const [messages, setMessages] = useState(loadMessages);
   const [loading, setLoading]   = useState(false);
 
@@ -280,105 +287,307 @@ export default function App() {
     <div style={{ fontFamily: "Georgia,serif", background: C.cream, minHeight: "100vh" }}>
 
       {/* Banner emergencia */}
-      <div style={{ background: C.roseDeep, color: "#fff", textAlign: "center", padding: "10px", fontSize: "13px", letterSpacing: "0.04em" }}>
+      <div style={{
+        background: C.roseDeep, color: "#fff",
+        textAlign: "center", padding: "11px 24px",
+        fontFamily: "Georgia,serif", fontSize: "13px",
+        letterSpacing: "0.04em", lineHeight: "1.5",
+      }}>
         🆘 Peligro inmediato — llama al <strong>911</strong> · Línea VIDA: <strong>800-911-2000</strong>
       </div>
 
       {/* Nav */}
-      <nav style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "20px 48px", borderBottom: `1px solid ${C.parchment}` }}>
+      <nav style={{
+        background: C.cream, borderBottom: `1px solid ${C.parchment}`,
+        padding: "20px 48px", display: "flex",
+        justifyContent: "space-between", alignItems: "center",
+      }}>
         <div style={{ fontSize: "14px", letterSpacing: "0.25em", color: C.gold, textTransform: "uppercase" }}>
           Entre Mujeres Legal
         </div>
-        <button
-          onClick={() => setOpen(true)}
-          style={{ background: "transparent", border: `1px solid ${C.gold}`, color: C.gold, padding: "8px 22px", fontSize: "12px", letterSpacing: "0.12em", textTransform: "uppercase", cursor: "pointer", fontFamily: "Georgia,serif" }}
+        <a
+          href="https://wa.me/525527459155"
+          target="_blank" rel="noopener noreferrer"
+          style={{
+            fontFamily: "Georgia,serif", fontSize: "12px",
+            letterSpacing: "0.12em", color: C.gold, textTransform: "uppercase",
+            textDecoration: "none", border: `1px solid ${C.gold}`, padding: "8px 22px",
+          }}
         >
-          Consulta Personal
-        </button>
+          Consulta con Abogad@
+        </a>
       </nav>
 
       {/* Hero */}
-      <section style={{ minHeight: "86vh", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", textAlign: "center", padding: "60px 32px", position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)", width: "500px", height: "500px", borderRadius: "50%", background: `radial-gradient(circle, ${C.goldLight}18 0%, transparent 70%)`, pointerEvents: "none" }} />
-        <div style={{ border: `1px solid ${C.mist}`, display: "inline-block", padding: "7px 22px", marginBottom: "40px", fontSize: "11px", letterSpacing: "0.2em", color: C.rose, textTransform: "uppercase" }}>
+      <section style={{
+        minHeight: "86vh", padding: "60px 32px",
+        display: "flex", flexDirection: "column", alignItems: "center",
+        justifyContent: "center", textAlign: "center", gap: "32px",
+        position: "relative", overflow: "hidden",
+      }}>
+        <div style={{
+          position: "absolute", top: "50%", left: "50%",
+          transform: "translate(-50%,-50%)",
+          width: "500px", height: "500px", borderRadius: "50%",
+          background: `radial-gradient(circle, ${C.goldLight}18 0%, transparent 70%)`,
+          pointerEvents: "none",
+        }} />
+
+        <div style={{
+          border: `1px solid ${C.mist}`, padding: "7px 22px",
+          fontFamily: "Georgia,serif", fontSize: "11px",
+          letterSpacing: "0.2em", color: C.rose, textTransform: "uppercase",
+        }}>
           Especialistas · Violencia de Género · Sistema Penal Acusatorio
         </div>
-        <h1 style={{ fontSize: "clamp(38px,6vw,72px)", fontWeight: "400", color: C.charcoal, lineHeight: "1.15", maxWidth: "760px", margin: "0 auto 20px" }}>
-          Justicia al alcance de <em>todas</em> las <span style={{ color: C.gold }}>mujeres</span>
+
+        <h1 style={{
+          fontFamily: "Georgia,serif", fontSize: "clamp(38px,6vw,72px)",
+          fontWeight: "400", color: C.charcoal,
+          lineHeight: "1.15", margin: 0, maxWidth: "760px",
+        }}>
+          Justicia al alcance de <em style={{ fontStyle: "italic" }}>todas</em> las{" "}
+          <span style={{ color: C.gold }}>mujeres</span>
         </h1>
-        <p style={{ fontSize: "17px", color: C.slate, fontStyle: "italic", maxWidth: "500px", margin: "0 auto 48px", lineHeight: "1.7" }}>
+
+        <p style={{
+          fontFamily: "Georgia,serif", fontSize: "17px",
+          color: C.slate, fontStyle: "italic",
+          maxWidth: "500px", margin: 0, lineHeight: "1.7",
+        }}>
           Asesoría jurídica especializada en violencia de género, disponible las 24 horas.
         </p>
-        <div style={{ display: "flex", gap: "16px", justifyContent: "center", flexWrap: "wrap" }}>
-          <button onClick={() => setOpen(true)} style={{ background: C.charcoal, color: C.cream, border: "none", padding: "15px 36px", fontSize: "13px", letterSpacing: "0.12em", textTransform: "uppercase", cursor: "pointer", fontFamily: "Georgia,serif" }}>
-            Iniciar Asesoría →
-          </button>
-          <button style={{ background: "transparent", color: C.charcoal, border: `1px solid ${C.charcoal}`, padding: "15px 36px", fontSize: "13px", letterSpacing: "0.12em", textTransform: "uppercase", cursor: "pointer", fontFamily: "Georgia,serif" }}>
-            Consulta con Abogada
-          </button>
-        </div>
-        <div style={{ marginTop: "52px", background: "#fff", border: `1px solid ${C.parchment}`, borderLeft: `3px solid ${C.rose}`, padding: "14px 24px", display: "flex", alignItems: "center", gap: "12px" }}>
-          <span style={{ fontSize: "18px" }}>🆘</span>
-          <span style={{ fontSize: "13px", color: C.slate }}>
-            Peligro inmediato — llama al <strong style={{ color: C.rose }}>911</strong> · Línea VIDA: <strong style={{ color: C.rose }}>800-911-2000</strong>
-          </span>
-        </div>
-      </section>
 
-      {/* CTA oscuro */}
-      <section style={{ background: C.charcoal, padding: "56px 32px", textAlign: "center" }}>
-        <p style={{ fontSize: "clamp(18px,3vw,28px)", color: C.cream, lineHeight: "1.6", maxWidth: "660px", margin: "0 auto 28px" }}>
-          ¿Fuiste víctima de violencia? <span style={{ color: C.goldLight }}>No estás sola.</span> Orientación <em>gratuita y confidencial.</em>
-        </p>
-        <button onClick={() => setOpen(true)} style={{ background: C.gold, color: "#fff", border: "none", padding: "13px 34px", fontSize: "13px", letterSpacing: "0.1em", textTransform: "uppercase", cursor: "pointer", fontFamily: "Georgia,serif" }}>
-          Hablar Ahora →
+        <button
+          onClick={() => setOpen(true)}
+          style={{
+            background: C.charcoal, color: C.cream, border: "none",
+            padding: "16px 48px", fontFamily: "Georgia,serif", fontSize: "13px",
+            letterSpacing: "0.12em", textTransform: "uppercase",
+            cursor: "pointer", width: "100%", maxWidth: "420px",
+          }}
+        >
+          Iniciar Asesoría →
         </button>
+
+        <p
+          onClick={() => setOpen(true)}
+          style={{
+            fontFamily: "Georgia,serif", fontSize: "13px",
+            color: C.rose, fontStyle: "italic", cursor: "pointer",
+            margin: 0, textDecoration: "underline",
+            textDecorationColor: `${C.rose}66`, textUnderlineOffset: "3px",
+          }}
+        >
+          ¿No sabes dónde denunciar? Pregúntale al chatbot de Entre Mujeres Legal
+        </p>
+
+        <a
+          href="https://wa.me/525527459155"
+          target="_blank" rel="noopener noreferrer"
+          style={{
+            fontFamily: "Georgia,serif", fontSize: "12px",
+            letterSpacing: "0.1em", color: C.gold, textTransform: "uppercase",
+            textDecoration: "none", border: `1px solid ${C.gold}`,
+            padding: "12px 40px", width: "100%", maxWidth: "420px",
+            textAlign: "center", display: "inline-block", boxSizing: "border-box",
+          }}
+        >
+          Consulta con Abogad@
+        </a>
       </section>
 
-      {/* Áreas */}
+      {/* Áreas de Especialidad */}
       <section style={{ background: C.parchment, padding: "72px 48px" }}>
-        <h2 style={{ fontSize: "12px", letterSpacing: "0.2em", color: C.gold, textTransform: "uppercase", marginBottom: "40px" }}>Áreas de Especialidad</h2>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(220px,1fr))", gap: "1px", background: C.mist + "44" }}>
+        <h2 style={{
+          fontFamily: "Georgia,serif", fontSize: "12px",
+          letterSpacing: "0.2em", color: C.gold, textTransform: "uppercase",
+          marginBottom: "40px", textAlign: "center",
+        }}>
+          Áreas de Especialidad
+        </h2>
+        <div style={{
+          display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(220px,1fr))",
+          gap: "1px", background: `${C.mist}44`,
+        }}>
           {DELITOS.map(d => (
             <div key={d.n} style={{ background: C.cream, padding: "32px 28px" }}>
-              <div style={{ fontSize: "16px", color: C.rose, marginBottom: "8px" }}>{d.n}</div>
-              <div style={{ fontSize: "13px", color: C.slate, lineHeight: "1.6" }}>{d.d}</div>
+              <div style={{ fontFamily: "Georgia,serif", fontSize: "16px", color: C.rose, marginBottom: "8px" }}>
+                {d.n}
+              </div>
+              <div style={{ fontFamily: "Georgia,serif", fontSize: "13px", color: C.slate, lineHeight: "1.6" }}>
+                {d.d}
+              </div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Nosotras */}
+      {/* Servicios */}
+      <section style={{ background: C.cream, padding: "72px 48px" }}>
+        <div style={{ maxWidth: "900px", margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "24px" }}>
+
+          {/* Escritos Urgentes */}
+          <div style={{ border: `1px solid ${C.mist}`, padding: "40px 36px" }}>
+            <div style={{
+              fontFamily: "Georgia,serif", fontSize: "12px",
+              letterSpacing: "0.2em", color: C.gold, textTransform: "uppercase", marginBottom: "16px",
+            }}>
+              Escritos Urgentes
+            </div>
+            <p style={{ fontFamily: "Georgia,serif", fontSize: "15px", color: C.charcoal, lineHeight: "1.8", marginBottom: "20px" }}>
+              Redactamos por ti los documentos legales que necesitas, en el menor tiempo posible:
+            </p>
+            <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+              {[
+                "Escritos de denuncia penal",
+                "Solicitud de copias de carpeta de investigación",
+                "Escritos de medidas de protección",
+                "Recursos y promociones ante fiscalía",
+                "Otros escritos urgentes",
+              ].map(item => (
+                <li key={item} style={{
+                  fontFamily: "Georgia,serif", fontSize: "13px", color: C.slate,
+                  padding: "7px 0", borderBottom: `1px solid ${C.parchment}`,
+                  display: "flex", gap: "10px", alignItems: "flex-start",
+                }}>
+                  <span style={{ color: C.rose, flexShrink: 0 }}>—</span> {item}
+                </li>
+              ))}
+            </ul>
+            <a
+              href="https://wa.me/525527459155"
+              target="_blank" rel="noopener noreferrer"
+              style={{
+                display: "inline-block", marginTop: "28px",
+                fontFamily: "Georgia,serif", fontSize: "12px",
+                letterSpacing: "0.12em", textTransform: "uppercase",
+                color: C.gold, textDecoration: "none",
+                borderBottom: `1px solid ${C.gold}`, paddingBottom: "2px",
+              }}
+            >
+              Solicitar escrito →
+            </a>
+          </div>
+
+          {/* Videoconsulta */}
+          <div style={{ border: `1px solid ${C.gold}`, padding: "40px 36px", background: C.parchment }}>
+            <div style={{
+              fontFamily: "Georgia,serif", fontSize: "12px",
+              letterSpacing: "0.2em", color: C.gold, textTransform: "uppercase", marginBottom: "16px",
+            }}>
+              Asesoría por Videollamada
+            </div>
+            <p style={{ fontFamily: "Georgia,serif", fontSize: "15px", color: C.charcoal, lineHeight: "1.8", marginBottom: "16px" }}>
+              Consulta personalizada con personal jurídico especializado en violencia de género, desde la comodidad de tu hogar.
+            </p>
+            <p style={{ fontFamily: "Georgia,serif", fontSize: "13px", color: C.slate, lineHeight: "1.7", marginBottom: "28px" }}>
+              Atención confidencial, sin necesidad de trasladarte. Revisamos tu caso a detalle y te orientamos sobre los pasos a seguir.
+            </p>
+            <div style={{ background: C.cream, border: `1px solid ${C.parchment}`, padding: "16px 14px", marginBottom: "28px", borderRadius: "4px" }}>
+              <div style={{ fontFamily: "Georgia,serif", fontSize: "11px", letterSpacing: "0.12em", color: C.gold, textTransform: "uppercase", marginBottom: "12px" }}>
+                Incluye:
+              </div>
+              <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+                {["Seguimiento por 48 horas post-consulta", "Acceso a recursos y contactos en Puebla"].map(item => (
+                  <li key={item} style={{
+                    fontFamily: "Georgia,serif", fontSize: "12px", color: C.slate,
+                    padding: "6px 0", display: "flex", gap: "8px",
+                  }}>
+                    <span style={{ color: C.rose, flexShrink: 0 }}>✓</span> {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div style={{ borderTop: `1px solid ${C.gold}55`, paddingTop: "24px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <div>
+                <div style={{ fontFamily: "Georgia,serif", fontSize: "11px", letterSpacing: "0.15em", color: C.mist, textTransform: "uppercase" }}>
+                  Costo por sesión
+                </div>
+                <div style={{ fontFamily: "Georgia,serif", fontSize: "36px", color: C.charcoal, lineHeight: "1.1", marginTop: "4px" }}>
+                  $700 <span style={{ fontSize: "14px", color: C.slate }}>MXN</span>
+                </div>
+              </div>
+              <a
+                href="https://wa.me/525527459155?text=Hola,%20quiero%20agendar%20una%20videoconsulta%20de%20$700"
+                target="_blank" rel="noopener noreferrer"
+                style={{
+                  background: C.charcoal, color: C.cream, textDecoration: "none",
+                  fontFamily: "Georgia,serif", fontSize: "12px",
+                  letterSpacing: "0.12em", textTransform: "uppercase",
+                  padding: "14px 22px", display: "inline-block",
+                }}
+              >
+                Agendar →
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Quiénes somos */}
       <section style={{ background: C.cream, padding: "72px 48px", display: "flex", justifyContent: "center" }}>
         <div style={{ maxWidth: "580px" }}>
-          <h2 style={{ fontSize: "12px", letterSpacing: "0.2em", color: C.gold, textTransform: "uppercase", marginBottom: "20px" }}>Entre Mujeres Legal</h2>
-          <p style={{ fontSize: "17px", color: C.charcoal, lineHeight: "1.8", marginBottom: "14px" }}>
+          <h2 style={{
+            fontFamily: "Georgia,serif", fontSize: "12px",
+            letterSpacing: "0.2em", color: C.gold, textTransform: "uppercase", marginBottom: "20px",
+          }}>
+            Entre Mujeres Legal
+          </h2>
+          <p style={{ fontFamily: "Georgia,serif", fontSize: "17px", color: C.charcoal, lineHeight: "1.8", marginBottom: "14px" }}>
             Despacho especializado en derecho penal y violencia de género. Puebla, México.
           </p>
-          <p style={{ fontSize: "14px", color: C.slate, lineHeight: "1.7", fontStyle: "italic" }}>
-            Colectiva Entre Mujeres — comprometidas con la protección de los derechos de las mujeres y el acceso a la justicia.
+          <p style={{ fontFamily: "Georgia,serif", fontSize: "14px", color: C.slate, lineHeight: "1.7", fontStyle: "italic" }}>
+            Comprometidas con la protección de los derechos de las mujeres y el acceso a la justicia.
           </p>
         </div>
       </section>
 
+      {/* Estadísticas */}
+      <section style={{ background: C.cream, padding: "72px 48px" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "16px", maxWidth: "800px", margin: "0 auto" }}>
+          {[
+            { num: "500+", label: "Víctimas atendidas" },
+            { num: "300+", label: "Casos de éxito" },
+            { num: "24h",  label: "Disponibilidad" },
+          ].map(s => (
+            <div key={s.label} style={{ border: `1px solid ${C.gold}`, padding: "28px 16px", textAlign: "center" }}>
+              <div style={{ fontFamily: "Georgia,serif", fontSize: "36px", color: C.gold }}>{s.num}</div>
+              <div style={{ fontFamily: "Georgia,serif", fontSize: "11px", letterSpacing: "0.15em", textTransform: "uppercase", color: C.slate, marginTop: "8px" }}>
+                {s.label}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* Footer */}
-      <footer style={{ background: C.charcoal, color: C.mist, padding: "52px 48px", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "40px" }}>
+      <footer style={{
+        background: C.charcoal, color: C.mist, padding: "52px 48px",
+        display: "grid", gridTemplateColumns: "1fr 1fr", gap: "40px",
+      }}>
         <div>
-          <div style={{ fontSize: "12px", letterSpacing: "0.2em", color: C.gold, textTransform: "uppercase", marginBottom: "20px" }}>Contacto</div>
-          {["Puebla, Pue., México", "+52 (222) 000-0000", "contacto@entremujeres.mx", "Lun–Vie 9:00–18:00"].map(t => (
-            <div key={t} style={{ fontSize: "13px", color: C.mist, marginBottom: "9px" }}>{t}</div>
+          <div style={{ fontFamily: "Georgia,serif", fontSize: "12px", letterSpacing: "0.2em", color: C.gold, textTransform: "uppercase", marginBottom: "20px" }}>Contacto</div>
+          {["Puebla, Pue., México", "55 2745 9155", "entremujereslegal@gmail.com", "Lun–Vie 9:00–18:00"].map(t => (
+            <div key={t} style={{ fontFamily: "Georgia,serif", fontSize: "13px", color: C.mist, marginBottom: "9px" }}>{t}</div>
           ))}
-          <div style={{ marginTop: "14px", fontSize: "13px", color: C.rose }}>🆘 Línea VIDA: 800-911-2000</div>
+          <div style={{ marginTop: "14px", fontFamily: "Georgia,serif", fontSize: "13px", color: C.rose }}>
+            🆘 Línea VIDA: 800-911-2000
+          </div>
         </div>
         <div>
-          <div style={{ fontSize: "12px", letterSpacing: "0.2em", color: C.gold, textTransform: "uppercase", marginBottom: "20px" }}>Delitos</div>
+          <div style={{ fontFamily: "Georgia,serif", fontSize: "12px", letterSpacing: "0.2em", color: C.gold, textTransform: "uppercase", marginBottom: "20px" }}>Delitos</div>
           {DELITOS.map(d => (
-            <div key={d.n} style={{ fontSize: "13px", color: C.mist, marginBottom: "9px" }}>{d.n}</div>
+            <div key={d.n} style={{ fontFamily: "Georgia,serif", fontSize: "13px", color: C.mist, marginBottom: "9px" }}>{d.n}</div>
           ))}
         </div>
-        <div style={{ gridColumn: "1/-1", borderTop: `1px solid #3a3835`, paddingTop: "20px", fontSize: "11px", color: "#5a5650", lineHeight: "1.7" }}>
-          © 2026 Entre Mujeres Legal · Colectiva Entre Mujeres · Todos los derechos reservados.<br />
-          <em>La asesoría automatizada es orientación general y no constituye patrocinio legal ni relación abogado-cliente.</em>
+        <div style={{ gridColumn: "1/-1", borderTop: "1px solid #3a3835", paddingTop: "20px", fontFamily: "Georgia,serif", fontSize: "11px", color: "#5a5650", lineHeight: "1.7" }}>
+          © 2026 Entre Mujeres Legal · Todos los derechos reservados.<br />
+          <em>
+            La asesoría automatizada es orientación general y no constituye
+            patrocinio legal ni relación abogado-cliente. Para casos específicos
+            se recomienda la consulta personal.
+          </em>
         </div>
       </footer>
 

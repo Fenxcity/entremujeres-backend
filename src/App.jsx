@@ -367,7 +367,7 @@ export default function App() {
             cursor: "pointer", width: "100%", maxWidth: "420px",
           }}
         >
-          Iniciar Asesoría →
+          INICIAR ASESORÍA GRATIS
         </button>
 
         <p
@@ -560,8 +560,15 @@ export default function App() {
       }}>
         <div>
           <div style={{ fontFamily: "Georgia,serif", fontSize: "12px", letterSpacing: "0.2em", color: C.gold, textTransform: "uppercase", marginBottom: "20px" }}>Contacto</div>
-          {["Puebla, Pue., México", "55 2745 9155", "entremujereslegal@gmail.com", "Lun–Vie 9:00–18:00"].map(t => (
-            <div key={t} style={{ fontFamily: "Georgia,serif", fontSize: "13px", color: C.mist, marginBottom: "9px" }}>{t}</div>
+          {[
+            { text: "Puebla, Pue., México", href: null },
+            { text: "55 2745 9155", href: "tel:+525527459155" },
+            { text: "entremujereslegal@gmail.com", href: "mailto:entremujereslegal@gmail.com" },
+            { text: "Lun–Vie 9:00–18:00", href: null },
+          ].map(({ text, href }) => (
+            href
+              ? <a key={text} href={href} style={{ display: "block", fontFamily: "Georgia,serif", fontSize: "13px", color: C.mist, marginBottom: "9px", textDecoration: "none" }}>{text}</a>
+              : <div key={text} style={{ fontFamily: "Georgia,serif", fontSize: "13px", color: C.mist, marginBottom: "9px" }}>{text}</div>
           ))}
           <div style={{ marginTop: "14px", fontFamily: "Georgia,serif", fontSize: "13px", color: C.rose }}>
             🆘 Línea VIDA: 800-911-2000

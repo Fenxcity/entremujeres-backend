@@ -16,15 +16,19 @@ const SUGERIDAS = [
 ];
 
 const DELITOS = [
-  { n: "Feminicidio",          d: "Homicidio de mujer por razones de género. Penas agravadas y protocolo especializado." },
-  { n: "Violación",            d: "Acceso carnal sin consentimiento. Incluye violación marital y entre conocidos." },
+  // Violencia familiar
   { n: "Violencia Familiar",   d: "Actos de violencia física, psicológica, patrimonial o sexual en el núcleo familiar. Aplica también para novio o exnovio." },
+  // Delitos sexuales
+  { n: "Violación",            d: "Acceso carnal sin consentimiento. Incluye violación marital y entre conocidos." },
   { n: "Acoso Sexual",         d: "Conducta de naturaleza sexual no deseada en espacios laborales, escolares o públicos." },
   { n: "Ley Olimpia",          d: "Difusión no consentida de imágenes íntimas." },
   { n: "Ciberacoso",           d: "Hostigamiento, intimidación o amenazas a través de medios digitales y redes sociales." },
-  { n: "Trata de Personas",    d: "Explotación sexual, laboral o mendicidad forzada. Derechos reforzados como víctima." },
+  // Otros delitos
   { n: "Sustracción de Menor", d: "Retención ilegal de menores. Protección de derechos de custodia y convivencia." },
   { n: "Abandono de Persona",  d: "Incumplimiento de obligación de dar alimentos. Responsabilidad penal y civil." },
+  // Delitos graves
+  { n: "Trata de Personas",    d: "Explotación sexual, laboral o mendicidad forzada. Derechos reforzados como víctima." },
+  { n: "Feminicidio",          d: "Homicidio de mujer por razones de género. Penas agravadas y protocolo especializado." },
 ];
 
 /* ── Markdown ── */

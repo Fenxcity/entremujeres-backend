@@ -118,7 +118,7 @@ Toda víctima tiene derecho a:
 - Ser informada de sus derechos en cualquier etapa del proceso.
 - Acceso a justicia pronta, gratuita e imparcial.
 - Trato con respeto y dignidad, sin discriminación.
-- Atención médica y psicológica de urgencia, gratuita.
+- Atención psicológica de urgencia.
 - Comunicarse inmediatamente con familiares y asesor.
 - Ser interrogada por persona del mismo sexo si lo solicita.
 - Solicitar medidas de protección y medidas cautelares.

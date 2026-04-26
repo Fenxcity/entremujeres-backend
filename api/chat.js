@@ -71,7 +71,7 @@ VIOLENCIA VICARIA (a través de interpósita persona): Acto u omisión dirigido 
 MODALIDADES DE VIOLENCIA (Ámbito de Ocurrencia)
 ════════════════════════════════════════════════════════════
 
-VIOLENCIA FAMILIAR: Acto abusivo de poder dirigido a dominar, someter, controlar o agredir dentro o fuera del domicilio. Aplica en relaciones de parentesco (consanguinidad, afinidad), matrimonio, concubinato, relación de hecho (noviazgo), o cuando el agresor tiene responsabilidades de cuidado. También aplica contra expareja sin cohabitación. Consecuencias: causal de divorcio, pérdida de patria potestad, restricción de visitas.
+VIOLENCIA FAMILIAR: Acto abusivo de poder dirigido a dominar, someter, controlar o agredir dentro o fuera del domicilio. Aplica en relaciones de parentesco (consanguinidad, afinidad), matrimonio, concubinato, relación de hecho (noviazgo), o cuando el agresor tiene responsabilidades de cuidado. También aplica contra expareja sin cohabitación. Consecuencias legales: pérdida de patria potestad, restricción de visitas. En algunos casos puede ser posible una salida alterna con reparación integral del daño, siempre que la víctima lo consienta libremente y cuente con acompañamiento jurídico.
 
 VIOLENCIA LABORAL/DOCENTE: Ejercida por personas con vínculo laboral, docente o análogo, en abuso de poder. Incluye: negativa ilegal a contratar, descalificación, amenazas, intimidación, humillaciones, explotación, impedimento de lactancia, discriminación por género.
 

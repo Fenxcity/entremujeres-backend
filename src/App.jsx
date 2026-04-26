@@ -297,7 +297,7 @@ export default function App() {
       </div>
 
       {/* Nav */}
-      <nav style={{
+      <nav className="eml-nav" style={{
         background: C.cream, borderBottom: `1px solid ${C.parchment}`,
         padding: "20px 48px", display: "flex",
         justifyContent: "space-between", alignItems: "center",
@@ -319,7 +319,7 @@ export default function App() {
       </nav>
 
       {/* Hero */}
-      <section style={{
+      <section className="eml-hero" style={{
         minHeight: "86vh", padding: "60px 32px",
         display: "flex", flexDirection: "column", alignItems: "center",
         justifyContent: "center", textAlign: "center", gap: "32px",
@@ -333,7 +333,7 @@ export default function App() {
           pointerEvents: "none",
         }} />
 
-        <div style={{
+        <div className="eml-badge" style={{
           border: `1px solid ${C.mist}`, padding: "7px 22px",
           fontFamily: "Georgia,serif", fontSize: "11px",
           letterSpacing: "0.2em", color: C.rose, textTransform: "uppercase",
@@ -398,7 +398,7 @@ export default function App() {
       </section>
 
       {/* Áreas de Especialidad */}
-      <section style={{ background: C.parchment, padding: "72px 48px" }}>
+      <section className="eml-section" style={{ background: C.parchment, padding: "72px 48px" }}>
         <h2 style={{
           fontFamily: "Georgia,serif", fontSize: "12px",
           letterSpacing: "0.2em", color: C.gold, textTransform: "uppercase",
@@ -424,8 +424,8 @@ export default function App() {
       </section>
 
       {/* Servicios */}
-      <section style={{ background: C.cream, padding: "72px 48px" }}>
-        <div style={{ maxWidth: "900px", margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "24px" }}>
+      <section className="eml-section" style={{ background: C.cream, padding: "72px 48px" }}>
+        <div className="eml-servicios-grid" style={{ maxWidth: "900px", margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "24px" }}>
 
           {/* Escritos Urgentes */}
           <div style={{ border: `1px solid ${C.mist}`, padding: "40px 36px" }}>
@@ -518,7 +518,7 @@ export default function App() {
       </section>
 
       {/* Quiénes somos */}
-      <section style={{ background: C.cream, padding: "72px 48px", display: "flex", justifyContent: "center" }}>
+      <section className="eml-section" style={{ background: C.cream, padding: "72px 48px", display: "flex", justifyContent: "center" }}>
         <div style={{ maxWidth: "580px" }}>
           <h2 style={{
             fontFamily: "Georgia,serif", fontSize: "12px",
@@ -536,8 +536,8 @@ export default function App() {
       </section>
 
       {/* Estadísticas */}
-      <section style={{ background: C.cream, padding: "72px 48px" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "16px", maxWidth: "800px", margin: "0 auto" }}>
+      <section className="eml-section" style={{ background: C.cream, padding: "72px 48px" }}>
+        <div className="eml-stats-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "16px", maxWidth: "800px", margin: "0 auto" }}>
           {[
             { num: "500+", label: "Víctimas atendidas" },
             { num: "300+", label: "Casos de éxito" },
@@ -554,7 +554,7 @@ export default function App() {
       </section>
 
       {/* Footer */}
-      <footer style={{
+      <footer className="eml-footer-grid" style={{
         background: C.charcoal, color: C.mist, padding: "52px 48px",
         display: "grid", gridTemplateColumns: "1fr 1fr", gap: "40px",
       }}>
@@ -582,6 +582,18 @@ export default function App() {
           </em>
         </div>
       </footer>
+
+      <style>{`
+        @media (max-width: 640px) {
+          .eml-nav   { padding: 14px 20px !important; }
+          .eml-hero  { padding: 40px 20px !important; gap: 22px !important; }
+          .eml-badge { font-size: 9px !important; letter-spacing: 0.08em !important; padding: 6px 12px !important; }
+          .eml-section { padding: 48px 20px !important; }
+          .eml-servicios-grid { grid-template-columns: 1fr !important; }
+          .eml-stats-grid { gap: 10px !important; }
+          .eml-footer-grid { grid-template-columns: 1fr !important; padding: 40px 20px !important; }
+        }
+      `}</style>
 
       <ChatPanel
         messages={messages} loading={loading} send={send} clearChat={clearChat}

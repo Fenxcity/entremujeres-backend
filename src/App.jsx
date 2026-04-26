@@ -193,11 +193,6 @@ function ChatPanel({ messages, loading, send, clearChat, open, onClose }) {
           )}
         </div>
 
-        {/* Disclaimer */}
-        <div style={{ background: C.parchment, padding: "6px 24px", fontFamily: "Georgia,serif", fontSize: "10px", color: C.mist, borderTop: `1px solid ${C.mist}33`, flexShrink: 0 }}>
-          Orientación general · No constituye patrocinio legal ni relación abogado-cliente
-        </div>
-
         {/* Input */}
         <div style={{ padding: "12px 16px 16px", background: C.cream, display: "flex", gap: "10px", alignItems: "flex-end", borderTop: `1px solid ${C.mist}33`, flexShrink: 0 }}>
           <textarea
@@ -228,6 +223,11 @@ function ChatPanel({ messages, loading, send, clearChat, open, onClose }) {
           >
             Enviar
           </button>
+        </div>
+
+        {/* Disclaimer */}
+        <div style={{ background: C.parchment, padding: "6px 24px", fontFamily: "Georgia,serif", fontSize: "10px", color: C.mist, borderTop: `1px solid ${C.mist}33`, flexShrink: 0 }}>
+          Orientación general · No constituye patrocinio legal ni relación abogado-cliente
         </div>
       </div>
 

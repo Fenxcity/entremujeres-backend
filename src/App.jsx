@@ -64,17 +64,11 @@ function loadMessages() {
 }
 
 /* ── CHAT PANEL ── */
-function ChatPanel({ onClose }) {
-  const [messages, setMessages] = useState(loadMessages);
-  const [input, setInput]   = useState("");
-  const [loading, setLoading] = useState(false);
-  const chatRef = useRef(null);
+function ChatPanel({ messages, loading, send, clearChat, open, onClose }) {
+  const [input, setInput] = useState("");
+  const chatRef    = useRef(null);
   const textareaRef = useRef(null);
   const lastMsgRef = useRef(null);
-
-  useEffect(() => {
-    try { localStorage.setItem("eml_chat", JSON.stringify(messages)); } catch {}
-  }, [messages]);
 
   useEffect(() => {
     if (loading) {
@@ -84,47 +78,16 @@ function ChatPanel({ onClose }) {
     }
   }, [messages, loading]);
 
-  const clearChat = () => {
-    const fresh = [INITIAL_MSG];
-    setMessages(fresh);
-    try { localStorage.setItem("eml_chat", JSON.stringify(fresh)); } catch {}
-  };
-
-  const send = async (texto) => {
+  const handleSend = (texto) => {
     const t = (texto ?? input).trim();
-    if (!t || loading) return;
-
-    const userMsg  = { role: "user", content: t };
-    const history  = [...messages, userMsg];
-    setMessages(history);
+    if (!t) return;
     setInput("");
-    setLoading(true);
-    if (textareaRef.current) {
-      textareaRef.current.style.height = "auto";
-    }
-
-    try {
-      const res  = await fetch(API_URL, {
-        method:  "POST",
-        headers: { "Content-Type": "application/json" },
-        body:    JSON.stringify({ messages: history.map(m => ({ role: m.role, content: m.content })) }),
-      });
-      const data = await res.json();
-      setMessages(prev => [...prev, {
-        role: "assistant",
-        content: data.reply ?? "Ocurrió un error. Intenta de nuevo.",
-      }]);
-    } catch {
-      setMessages(prev => [...prev, {
-        role: "assistant",
-        content: "No pude conectarme al servidor. Verifica tu conexión.",
-      }]);
-    }
-    setLoading(false);
+    if (textareaRef.current) textareaRef.current.style.height = "auto";
+    send(t);
   };
 
   const handleKey = (e) => {
-    if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); }
+    if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); handleSend(); }
   };
 
   const autoResize = (e) => {
@@ -138,7 +101,7 @@ function ChatPanel({ onClose }) {
       style={{
         position: "fixed", inset: 0, zIndex: 1000,
         background: "rgba(44,42,39,0.75)",
-        display: "flex", alignItems: "center", justifyContent: "center",
+        display: open ? "flex" : "none", alignItems: "center", justifyContent: "center",
         padding: "20px",
       }}
     >
@@ -178,7 +141,7 @@ function ChatPanel({ onClose }) {
             {PREGUNTAS.slice(0, 4).map((p, i) => (
               <button
                 key={i}
-                onClick={() => send(p)}
+                onClick={() => handleSend(p)}
                 style={{
                   background: "#fff", border: `1px solid ${C.parchment}`,
                   borderLeft: `3px solid ${C.rose}`,
@@ -241,7 +204,7 @@ function ChatPanel({ onClose }) {
             }}
           />
           <button
-            onClick={() => send()}
+            onClick={() => handleSend()}
             disabled={loading || !input.trim()}
             style={{
               background: loading || !input.trim() ? C.mist : C.charcoal,
@@ -273,7 +236,45 @@ function ChatPanel({ onClose }) {
 
 /* ── APP PRINCIPAL ── */
 export default function App() {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen]       = useState(false);
+  const [messages, setMessages] = useState(loadMessages);
+  const [loading, setLoading]   = useState(false);
+
+  useEffect(() => {
+    try { localStorage.setItem("eml_chat", JSON.stringify(messages)); } catch {}
+  }, [messages]);
+
+  const clearChat = () => {
+    const fresh = [INITIAL_MSG];
+    setMessages(fresh);
+    try { localStorage.setItem("eml_chat", JSON.stringify(fresh)); } catch {}
+  };
+
+  const send = async (t) => {
+    if (!t || loading) return;
+    const userMsg = { role: "user", content: t };
+    const history = [...messages, userMsg];
+    setMessages(history);
+    setLoading(true);
+    try {
+      const res  = await fetch(API_URL, {
+        method:  "POST",
+        headers: { "Content-Type": "application/json" },
+        body:    JSON.stringify({ messages: history.map(m => ({ role: m.role, content: m.content })) }),
+      });
+      const data = await res.json();
+      setMessages(prev => [...prev, {
+        role: "assistant",
+        content: data.reply ?? "Ocurrió un error. Intenta de nuevo.",
+      }]);
+    } catch {
+      setMessages(prev => [...prev, {
+        role: "assistant",
+        content: "No pude conectarme al servidor. Verifica tu conexión.",
+      }]);
+    }
+    setLoading(false);
+  };
 
   return (
     <div style={{ fontFamily: "Georgia,serif", background: C.cream, minHeight: "100vh" }}>
@@ -381,7 +382,10 @@ export default function App() {
         </div>
       </footer>
 
-      {open && <ChatPanel onClose={() => setOpen(false)} />}
+      <ChatPanel
+        messages={messages} loading={loading} send={send} clearChat={clearChat}
+        open={open} onClose={() => setOpen(false)}
+      />
     </div>
   );
 }

@@ -28,11 +28,18 @@ const DELITOS = [
   { n: "Trata de Personas", d: "Identificación, asistencia a víctimas y proceso legal." },
 ];
 
-/* ── Markdown mínimo ── */
+/* ── Markdown ── */
 function md(text) {
   return text
     .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
-    .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+    // bold
+    .replace(/\*\*(.+?)\*\*/gs, "<strong>$1</strong>")
+    // italic: *texto* o _texto_
+    .replace(/\*([^*\n]+)\*/g, "<em>$1</em>")
+    .replace(/_([^_\n]+)_/g, "<em>$1</em>")
+    // separadores --- → línea visual sutil
+    .replace(/^-{3,}$/gm, '<hr style="border:none;border-top:1px solid #EDE8E0;margin:8px 0;">')
+    // saltos de línea
     .replace(/\n/g, "<br>");
 }
 

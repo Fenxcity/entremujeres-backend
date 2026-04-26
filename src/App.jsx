@@ -398,7 +398,7 @@ export default function App() {
       </section>
 
       {/* Áreas de Especialidad */}
-      <section className="eml-section" style={{ background: C.parchment, padding: "72px 48px" }}>
+      <section className="eml-section" style={{ background: C.parchment, padding: "48px 48px" }}>
         <h2 style={{
           fontFamily: "Georgia,serif", fontSize: "12px",
           letterSpacing: "0.2em", color: C.gold, textTransform: "uppercase",
@@ -424,7 +424,7 @@ export default function App() {
       </section>
 
       {/* Servicios */}
-      <section className="eml-section" style={{ background: C.cream, padding: "72px 48px" }}>
+      <section className="eml-section" style={{ background: C.cream, padding: "48px 48px" }}>
         <div className="eml-servicios-grid" style={{ maxWidth: "900px", margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "24px" }}>
 
           {/* Escritos Urgentes */}
@@ -518,7 +518,7 @@ export default function App() {
       </section>
 
       {/* Quiénes somos */}
-      <section className="eml-section" style={{ background: C.cream, padding: "72px 48px", display: "flex", justifyContent: "center" }}>
+      <section className="eml-section" style={{ background: C.cream, padding: "48px 48px", display: "flex", justifyContent: "center" }}>
         <div style={{ maxWidth: "580px" }}>
           <h2 style={{
             fontFamily: "Georgia,serif", fontSize: "12px",
@@ -536,7 +536,7 @@ export default function App() {
       </section>
 
       {/* Estadísticas */}
-      <section className="eml-section" style={{ background: C.cream, padding: "72px 48px" }}>
+      <section className="eml-section" style={{ background: C.cream, padding: "40px 48px" }}>
         <div className="eml-stats-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "16px", maxWidth: "800px", margin: "0 auto" }}>
           {[
             { num: "500+", label: "Víctimas atendidas" },

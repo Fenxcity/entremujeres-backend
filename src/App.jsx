@@ -499,16 +499,8 @@ export default function App() {
                 ))}
               </ul>
             </div>
-            <div style={{ borderTop: `1px solid ${C.gold}55`, paddingTop: "24px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-              <div>
-                <div style={{ fontFamily: "Georgia,serif", fontSize: "11px", letterSpacing: "0.15em", color: C.mist, textTransform: "uppercase" }}>
-                  Costo por sesión
-                </div>
-                <div style={{ fontFamily: "Georgia,serif", fontSize: "36px", color: C.charcoal, lineHeight: "1.1", marginTop: "4px" }}>
-                  $700 <span style={{ fontSize: "14px", color: C.slate }}>MXN</span>
-                </div>
-              </div>
-              <a
+            <div style={{ borderTop: `1px solid ${C.gold}55`, paddingTop: "24px", display: "flex", justifyContent: "flex-end" }}>
+              <
                 href="https://wa.me/525527459155?text=Hola,%20quiero%20agendar%20una%20videoconsulta%20de%20$700"
                 target="_blank" rel="noopener noreferrer"
                 style={{

@@ -407,7 +407,7 @@ export default function App() {
           Áreas de Especialidad
         </h2>
         <div style={{
-          display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(220px,1fr))",
+          display: "grid", gridTemplateColumns: "repeat(3,1fr)",
           gap: "1px", background: `${C.mist}44`,
         }}>
           {DELITOS.map(d => (

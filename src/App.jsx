@@ -60,9 +60,16 @@ function ChatPanel({ onClose }) {
   const [loading, setLoading] = useState(false);
   const chatRef = useRef(null);
   const textareaRef = useRef(null);
+  const lastMsgRef = useRef(null);
 
   useEffect(() => {
-    if (chatRef.current) chatRef.current.scrollTop = chatRef.current.scrollHeight;
+    if (loading) {
+      // mientras carga, mostrar el spinner
+      if (chatRef.current) chatRef.current.scrollTop = chatRef.current.scrollHeight;
+    } else if (lastMsgRef.current) {
+      // cuando llega la respuesta, mostrar desde arriba del mensaje
+      lastMsgRef.current.scrollIntoView({ block: "start", behavior: "smooth" });
+    }
   }, [messages, loading]);
 
   const send = async (texto) => {
@@ -167,7 +174,7 @@ function ChatPanel({ onClose }) {
         {/* Mensajes */}
         <div ref={chatRef} style={{ flex: 1, overflowY: "auto", padding: "16px", display: "flex", flexDirection: "column", gap: "12px" }}>
           {messages.map((m, i) => (
-            <div key={i} style={{ display: "flex", justifyContent: m.role === "user" ? "flex-end" : "flex-start" }}>
+            <div key={i} ref={i === messages.length - 1 ? lastMsgRef : null} style={{ display: "flex", justifyContent: m.role === "user" ? "flex-end" : "flex-start" }}>
               <div
                 dangerouslySetInnerHTML={{ __html: md(m.content) }}
                 style={{

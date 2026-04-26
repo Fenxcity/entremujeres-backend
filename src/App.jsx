@@ -314,7 +314,7 @@ export default function App() {
             textDecoration: "none", border: `1px solid ${C.gold}`, padding: "8px 22px",
           }}
         >
-          Consulta con Nosotras
+          Consulta con Nosotros
         </a>
       </nav>
 
@@ -393,7 +393,7 @@ export default function App() {
             textAlign: "center", display: "inline-block", boxSizing: "border-box",
           }}
         >
-          Consulta con Nosotras
+          Consulta con Nosotros
         </a>
       </section>
 

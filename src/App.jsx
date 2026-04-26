@@ -106,7 +106,7 @@ function ChatPanel({ messages, loading, send, clearChat, open, onClose }) {
       }}
     >
       <div style={{
-        width: "100%", maxWidth: "620px", height: "92vh",
+        width: "100%", maxWidth: "620px", height: "92dvh", maxHeight: "100dvh",
         background: C.cream, display: "flex", flexDirection: "column",
         borderRadius: "16px 16px 0 0", overflow: "hidden",
         boxShadow: "0 -8px 40px rgba(0,0,0,0.3)",
@@ -226,7 +226,7 @@ function ChatPanel({ messages, loading, send, clearChat, open, onClose }) {
         </div>
 
         {/* Disclaimer */}
-        <div style={{ background: C.parchment, padding: "6px 24px", fontFamily: "Georgia,serif", fontSize: "10px", color: C.mist, borderTop: `1px solid ${C.mist}33`, flexShrink: 0 }}>
+        <div style={{ background: C.parchment, padding: "6px 24px", paddingBottom: "max(6px, env(safe-area-inset-bottom, 6px))", fontFamily: "Georgia,serif", fontSize: "10px", color: C.mist, borderTop: `1px solid ${C.mist}33`, flexShrink: 0 }}>
           Orientación general · No constituye patrocinio legal ni relación abogado-cliente
         </div>
       </div>

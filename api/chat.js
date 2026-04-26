@@ -204,6 +204,38 @@ Si preguntan sobre una ubicación en el estado de Puebla, proporciona la direcci
 - Zoquitlán: Calle Juventud S/N, interior Plaza Comunitaria. C.P. 75930.
 
 ════════════════════════════════════════════════════════════
+DIRECTORIO — Casa Carmen Serdán
+(Espacio donde también se pueden denunciar delitos de género)
+════════════════════════════════════════════════════════════
+
+Si preguntan por una ubicación en el estado de Puebla, además de la Fiscalía también puedes mencionar la Casa Carmen Serdán más cercana. Si una ciudad tiene dos ubicaciones, proporciona las dos.
+
+- Acatlán: Epigmenio Martínez 6, San Rafael, 74949 Acatlán de Osorio, Pue.
+- Acatzingo: Av. 4 Pte. 113, San Antonio, 75150 Acatzingo de Hidalgo, Pue.
+- Amozoc: Blvd. Cuauhtémoc, El Arenal, 72992 Amozoc de Mota, Pue.
+- Atlixco: C. 17 Nte. 1205, Solares Chicos, 74220 Atlixco, Pue.
+- Cuautlancingo: Esquina con Calle 2 de Abril, 5 de Mayo, Cuatro Caminos, 72700 San Juan Cuautlancingo, Pue.
+- Cuetzalán: Ocampo y Miguel Alvarado Centro, 73560 Cdad. de Cuetzalan, Pue.
+- Huejotzingo: Blvd. Huejotzingo Aeropuerto, Rancho de los Caballos, Puebla.
+- Huauchinango: Independencia y 16 de septiembre, Venta Grande, Huauchinango, Pue.
+- Izúcar de Matamoros: Internacional a Oaxaca 16B, Barrio de San Juan Piaxtla, 74480 Izúcar de Matamoros, Pue.
+- Puebla Bosques de San Sebastián: Blv del Gasoducto 2-28, Bosques de San Sebastián, 72310 Heroica Puebla de Zaragoza, Pue.
+- Puebla La Guadalupana: Ntra. Sra. de San Juan de los Lagos, La Guadalupana, 72595 Heroica Puebla de Zaragoza, Pue.
+- Puebla La Margarita: Blvd. Municipio Libre 42, INFONAVIT La Margarita, 72560 Heroica Puebla de Zaragoza, Pue.
+- San Martín Texmelucan: Álvaro Obregón Supermanzana, Col. Álvaro Obregón, 74060 San Martín Texmelucan de Labastida, Pue.
+- San Pedro Cholula: C. 14 Nte. 3001, Barrio de Jesús Tlatempa, 72770 San Andrés Cholula, Pue.
+- Tecamachalco: San Mateo Sur 311-329, Lonetlán, 75493 Tecamachalco, Pue.
+- Tehuacán: Calle 12 Pte 1285-1191, Los Frailes III, 75710 Tehuacán, Pue.
+- Tepeaca: Calle 11 Sur No. 511, Col. Hermosa Provincia, C.P. 75200, Tepeaca, Pue.
+- Tepexi de Rodríguez: Calle 5 de Mayo, Santo Domingo, C.P. 74690, Tepexi de Rodríguez, Pue.
+- Tetela de Ocampo: Av. la Paz 45, Centro, 73640 Cdad. de Tetela de Ocampo, Pue.
+- Teziutlán (1): Av. Miguel Hidalgo 450, Teziutlán, Puebla.
+- Teziutlán (2): Antigua Vía de Ferrocarril LB, Arboledas, 73890 Teziutlán, Pue.
+- Tlatlauquitepec: Carretera Teziutlán-Acajete, Av. de Agustín de Iturbide, Tlatlauquitepec, Puebla.
+- Xicotepec: Calle Zaragoza No. 198, Col. Centro, C.P. 73080, Xicotepec de Juárez, Pue.
+- Zacatlán: Carretera Federal Apizaco-Tecojotal, Principal Km. 119, Barrio San Bartolo, 73310 Zacatlán, Pue.
+
+════════════════════════════════════════════════════════════
 TONO Y ESTRUCTURA DE RESPUESTA
 ════════════════════════════════════════════════════════════
 

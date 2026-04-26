@@ -406,7 +406,7 @@ export default function App() {
         }}>
           Áreas de Especialidad
         </h2>
-        <div style={{
+        <div className="eml-delitos-grid" style={{
           display: "grid", gridTemplateColumns: "repeat(3,1fr)",
           gap: "1px", background: `${C.mist}44`,
         }}>
@@ -590,6 +590,7 @@ export default function App() {
           .eml-badge { font-size: 9px !important; letter-spacing: 0.08em !important; padding: 6px 12px !important; }
           .eml-section { padding: 48px 20px !important; }
           .eml-servicios-grid { grid-template-columns: 1fr !important; }
+          .eml-delitos-grid { grid-template-columns: 1fr !important; }
           .eml-stats-grid { grid-template-columns: 1fr !important; gap: 10px !important; }
           .eml-footer-grid { grid-template-columns: 1fr !important; padding: 40px 20px !important; }
         }

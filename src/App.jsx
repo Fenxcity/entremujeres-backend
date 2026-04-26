@@ -58,14 +58,6 @@ const INITIAL_MSG = {
   content: "Hola, bienvenida a **Entre Mujeres Legal**.\n\nSoy tu asesora jurídica virtual. Puedo orientarte sobre violencia familiar, acoso sexual, Ley Olimpia y más.\n\n¿En qué puedo ayudarte hoy?",
 };
 
-function loadMessages() {
-  try {
-    const saved = localStorage.getItem("eml_chat");
-    if (saved) return JSON.parse(saved);
-  } catch {}
-  return [INITIAL_MSG];
-}
-
 /* ── CHAT PANEL ── */
 function ChatPanel({ messages, loading, send, clearChat, open, onClose }) {
   const [input, setInput] = useState("");
@@ -248,18 +240,10 @@ function ChatPanel({ messages, loading, send, clearChat, open, onClose }) {
 /* ── APP PRINCIPAL ── */
 export default function App() {
   const [open, setOpen]         = useState(false);
-  const [messages, setMessages] = useState(loadMessages);
+  const [messages, setMessages] = useState([INITIAL_MSG]);
   const [loading, setLoading]   = useState(false);
 
-  useEffect(() => {
-    try { localStorage.setItem("eml_chat", JSON.stringify(messages)); } catch {}
-  }, [messages]);
-
-  const clearChat = () => {
-    const fresh = [INITIAL_MSG];
-    setMessages(fresh);
-    try { localStorage.setItem("eml_chat", JSON.stringify(fresh)); } catch {}
-  };
+  const clearChat = () => setMessages([INITIAL_MSG]);
 
   const send = async (t) => {
     if (!t || loading) return;

@@ -425,7 +425,7 @@ export default function App() {
 
       {/* Servicios */}
       <section className="eml-section" style={{ background: C.cream, padding: "72px 48px" }}>
-        <div className="eml-servicios-grid" style={{ maxWidth: "900px", margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "24px", alignItems: "start" }}>
+        <div className="eml-servicios-grid" style={{ maxWidth: "900px", margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "24px" }}>
 
           {/* Escritos Urgentes */}
           <div style={{ border: `1px solid ${C.mist}`, padding: "40px 36px" }}>

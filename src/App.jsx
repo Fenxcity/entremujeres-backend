@@ -50,15 +50,22 @@ function md(text) {
     .replace(/(<hr[^>]*>)(<br>)+/g, "$1");
 }
 
+const INITIAL_MSG = {
+  role: "assistant",
+  content: "Hola, bienvenida a **Entre Mujeres Legal**.\n\nSoy tu asesora jurídica virtual. Puedo orientarte sobre violencia familiar, acoso sexual, Ley Olimpia y más.\n\n¿En qué puedo ayudarte hoy?",
+};
+
+function loadMessages() {
+  try {
+    const saved = localStorage.getItem("eml_chat");
+    if (saved) return JSON.parse(saved);
+  } catch {}
+  return [INITIAL_MSG];
+}
+
 /* ── CHAT PANEL ── */
 function ChatPanel({ onClose }) {
-  const [messages, setMessages] = useState([
-    {
-      role: "assistant",
-      content:
-        "Hola, bienvenida a **Entre Mujeres Legal**.\n\nSoy tu asesora jurídica virtual. Puedo orientarte sobre violencia familiar, acoso sexual, Ley Olimpia y más.\n\n¿En qué puedo ayudarte hoy?",
-    },
-  ]);
+  const [messages, setMessages] = useState(loadMessages);
   const [input, setInput]   = useState("");
   const [loading, setLoading] = useState(false);
   const chatRef = useRef(null);
@@ -66,14 +73,22 @@ function ChatPanel({ onClose }) {
   const lastMsgRef = useRef(null);
 
   useEffect(() => {
+    try { localStorage.setItem("eml_chat", JSON.stringify(messages)); } catch {}
+  }, [messages]);
+
+  useEffect(() => {
     if (loading) {
-      // mientras carga, mostrar el spinner
       if (chatRef.current) chatRef.current.scrollTop = chatRef.current.scrollHeight;
     } else if (lastMsgRef.current) {
-      // cuando llega la respuesta, mostrar desde arriba del mensaje
       lastMsgRef.current.scrollIntoView({ block: "start", behavior: "smooth" });
     }
   }, [messages, loading]);
+
+  const clearChat = () => {
+    const fresh = [INITIAL_MSG];
+    setMessages(fresh);
+    try { localStorage.setItem("eml_chat", JSON.stringify(fresh)); } catch {}
+  };
 
   const send = async (texto) => {
     const t = (texto ?? input).trim();
@@ -143,7 +158,10 @@ function ChatPanel({ onClose }) {
               Confidencial · Disponible 24 horas
             </div>
           </div>
-          <button onClick={onClose} style={{ background: "none", border: "none", color: C.mist, fontSize: "24px", cursor: "pointer", lineHeight: 1 }}>×</button>
+          <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
+            <button onClick={clearChat} title="Nueva conversación" style={{ background: "none", border: `1px solid ${C.slate}`, color: C.mist, fontSize: "11px", letterSpacing: "0.08em", padding: "4px 10px", cursor: "pointer", fontFamily: "Georgia,serif" }}>Nueva</button>
+            <button onClick={onClose} style={{ background: "none", border: "none", color: C.mist, fontSize: "24px", cursor: "pointer", lineHeight: 1 }}>×</button>
+          </div>
         </div>
 
         {/* Emergencia */}

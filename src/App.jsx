@@ -126,7 +126,7 @@ function ChatPanel({ messages, loading, send, clearChat, open, onClose }) {
             </div>
           </div>
           <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
-            <button onClick={clearChat} title="Nueva conversación" style={{ background: "none", border: `1px solid ${C.slate}`, color: C.mist, fontSize: "11px", letterSpacing: "0.08em", padding: "4px 10px", cursor: "pointer", fontFamily: "Georgia,serif" }}>Nueva</button>
+            <button onClick={clearChat} title="Nueva conversación" style={{ background: "none", border: `1px solid ${C.slate}`, color: C.mist, fontSize: "11px", letterSpacing: "0.08em", padding: "4px 10px", cursor: "pointer", fontFamily: "Georgia,serif" }}>Nueva sesión</button>
             <button onClick={onClose} style={{ background: "none", border: "none", color: C.mist, fontSize: "24px", cursor: "pointer", lineHeight: 1 }}>×</button>
           </div>
         </div>

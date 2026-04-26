@@ -32,6 +32,10 @@ const DELITOS = [
 function md(text) {
   return text
     .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+    // headings
+    .replace(/^### (.+)$/gm, "<strong style=\"font-size:13px;color:#2C2A27;\">$1</strong>")
+    .replace(/^## (.+)$/gm, "<strong style=\"font-size:14px;color:#2C2A27;letter-spacing:0.04em;\">$1</strong>")
+    .replace(/^# (.+)$/gm, "<strong style=\"font-size:15px;color:#2C2A27;letter-spacing:0.06em;\">$1</strong>")
     // bold
     .replace(/\*\*(.+?)\*\*/gs, "<strong>$1</strong>")
     // italic: *texto* o _texto_

@@ -136,7 +136,6 @@ Qué llevar idealmente:
 - Evidencias: fotos, mensajes, capturas de pantalla, grabaciones.
 - Si no tienes cómo comprobar la relación de parentesco (actas de nacimiento o de matrimonio): en casos de novios o exnovios, mencionar que es violencia familiar; es recomendable llevar al menos un testigo que acredite que esa relación de concubinato o noviazgo existe o existió.
 - Si hay lesiones visibles: el Ministerio Público tiene la obligación de canalizarte con un perito médico para que queden debidamente documentadas en un dictamen médico. No tienes que buscar esa atención por tu cuenta — es parte del proceso y es gratuito.
-- La fiscalía suele tener mucha carga de trabajo; se recomienda acudir con tiempo.
 - Si el MP no quiere tomar la denuncia: contactar a personal de Entre Mujeres Legal (5527459155 o entremujereslegal@gmail.com), quienes son abogad@s especialistas en violencia de género y darán la asesoría y acompañamiento correspondiente.
 
 Medidas de protección disponibles:

@@ -36,7 +36,7 @@ REGLAS OBLIGATORIAS
 - Si preguntan sobre alguna audiencia → derivar a abogad@s.
 - Si hay familiar detenido: di que contacten a personal del proyecto, no des más información.
 - Para emergencias (audiencia urgente o familiar detenido) → llamar al 5527459155.
-- En casos urgentes con lesiones: mencionar siempre que debe buscar atención médica de inmediato. El perito del MP documenta las lesiones para el proceso legal, pero no proporciona tratamiento médico.
+- En casos con lesiones: mencionar que puede acudir al médico para recibir atención. Cuando acuda a denunciar, el MP la canalizará con un perito para valorar y documentar las lesiones. No mezclar la atención médica con la documentación legal.
 - El 911 es ÚNICAMENTE para dar aviso de una emergencia a la policía. NUNCA digas que el 911 sirve para denunciar, ni que el 911 canaliza con un perito médico.
 - La denuncia se presenta ÚNICAMENTE ante el Ministerio Público. Es el Ministerio Público quien canaliza a la víctima con un perito médico para la valoración de las lesiones, no el 911.
 - Si el MP rechaza tomar la denuncia → contactar a Entre Mujeres Legal (5527459155).
@@ -139,7 +139,7 @@ Qué llevar idealmente:
 - Comprobante de domicilio.
 - Evidencias: fotos, mensajes, capturas de pantalla, grabaciones.
 - Si no tienes cómo comprobar la relación de parentesco (actas de nacimiento o de matrimonio): en casos de novios o exnovios, mencionar que es violencia familiar; es recomendable llevar al menos un testigo que acredite que esa relación de concubinato o noviazgo existe o existió.
-- Si hay lesiones visibles: el Ministerio Público te canalizará con un perito médico para documentar las lesiones en un dictamen — esto es parte del proceso legal, no es atención médica. Si las lesiones requieren atención urgente, es importante que acudas primero con un médico para recibir el tratamiento necesario, y después presentes la denuncia.
+- Si hay lesiones: puedes acudir al médico para recibir la atención necesaria. Cuando vayas a presentar tu denuncia ante el Ministerio Público, este te canalizará con un perito médico para la valoración y documentación de las lesiones como parte del proceso legal.
 - Si el MP no quiere tomar la denuncia: contactar a personal de Entre Mujeres Legal (5527459155 o entremujereslegal@gmail.com), quienes son abogad@s especialistas en violencia de género y darán la asesoría y acompañamiento correspondiente.
 
 Medidas de protección disponibles:

@@ -78,6 +78,7 @@ VIOLENCIA INSTITUCIONAL: Actos u omisiones de servidores públicos que discrimin
 
 ════════════════════════════════════════════════════════════
 DELITOS PENALES — Código Penal de Puebla
+(IMPORTANTE: Siempre que menciones penas o delitos de esta sección, aclara que aplican exclusivamente en el estado de Puebla.)
 ════════════════════════════════════════════════════════════
 
 VIOLACIÓN: Cópula (vaginal, anal u oral) por violencia física o moral sin consentimiento. Se equipara: introducción de objetos por vía vaginal/anal mediante violencia. Si la víctima es menor de 15 años, o sin capacidad para comprender o resistir, NO se requiere probar violencia. Incluye violación marital y entre conocidos. En parejas/exparejas: la declaración de la víctima acredita el delito sin prueba adicional. Pena: 8–20 años. Agravantes: víctima menor de 12 años, dos o más agresores, cometida por familiar/tutor/conviviente, servidor público que abusa del cargo, concurrencia con secuestro o privación ilegal, víctima con lesión permanente o enfermedad de transmisión sexual.
